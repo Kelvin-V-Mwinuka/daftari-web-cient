@@ -138,9 +138,17 @@ class Register extends React.Component{
         }
 
         if(passwordText.value !== confirmPasswordText.value){
-            this.makeElementInvalid(confirmPasswordText)  
+            this.makeElementInvalid(confirmPasswordText)
+            this.setState({confirmPassword : 
+                { value : confirmPasswordText.value, valid : false, error : "Passwords don't match" }
+            })
         } else {
-            this.makeElementValid(confirmPasswordText)
+            if(passwordText.value !== ""){
+                this.makeElementValid(confirmPasswordText)
+                this.setState({ confirmPassword :
+                    { value : confirmPasswordText.value, valid : true }
+                })
+            }
         }
     }
 
@@ -153,16 +161,26 @@ class Register extends React.Component{
                 { value : confirmPasswordText.value, valid : false} 
             })
         } else {
-            this.makeElementValid(confirmPasswordText)
-            this.setState({ confirmPassword :
-                { value : confirmPasswordText.value, valid : true }
-            })
+            if(this.state.password.value !== ""){
+                this.makeElementValid(confirmPasswordText)
+                this.setState({ confirmPassword :
+                    { value : confirmPasswordText.value, valid : true }
+                })
+            }
         }
 
     }
 
     handleFormSubmit = (event) => {
         event.preventDefault()
+        // Make sure all the information is valid before sending it to the server
+        Object.keys(this.state).forEach( (key) => {
+            if(!this.state[key].valid){
+                console.log( key + " is not valid" );
+                return // End the form submission as soon as an invalid property is detected
+            }
+        } )
+        // Make the API call to register the user
     }
 
     render(){
