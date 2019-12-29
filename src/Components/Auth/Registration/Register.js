@@ -20,23 +20,32 @@ class Register extends React.Component{
     }
 
     makeElementInvalid = (element) => {
+        /** Make form elements invalid in order to display the form element's status  */
         element.classList.remove("is-valid")
         element.classList.add("is-invalid")
     }
 
     makeElementValid = (element) => {
+        /** Make form elements valid in order to display the form element's status  */
         element.classList.remove("is-invalid")
         element.classList.add("is-valid")
     }
 
     handleNameChange = (event) => {
         const nameText = event.target
+
         if(nameText.value === "") {
+            /** If name is empty after user has already previously typed on it,
+             * make the name element invalid, and update the 'name' attribute of the state
+             */
             this.makeElementInvalid(nameText)
             this.setState({ name : 
                 { value : nameText.value, valid : false, error : "Please provide a name" }
             })
         } else {
+            /** If name is not empty, make the name element valid
+             * and update the 'name' attribute of the state
+             */
             this.makeElementValid(nameText)
             this.setState({ name : { value : nameText.value, valid : true } })
         }
@@ -44,7 +53,11 @@ class Register extends React.Component{
 
     handleEmailChange = (event) => {
         const emailText = event.target
+
         if(emailText.value === ""){
+            /** If email element is empty after the user has already previously typed in it,
+             * make the element invalid and update the 'email' attribute of the state
+             */
             this.makeElementInvalid(emailText)
             this.setState({ email : 
                 { value : emailText.value, valid : false, error : "Please provide an email address"
@@ -52,7 +65,7 @@ class Register extends React.Component{
         } else {
             // Check email format validity
             if(EmailValidator.validate(emailText.value)){
-                // Validate email availability on ther server
+                // Validate email availability on ther server if email format is valid
                 const url = buildUrl(this.props.base_url, {
                     path : 'api/validate/email',
                     queryParams : {
@@ -64,21 +77,25 @@ class Register extends React.Component{
                 .then( res => res.json() )
                 .then( data => {
                     if(data.available === true){
-                        // Set component to valid if the email is available
+                        // Set email component to valid if the email is available
                         this.makeElementValid(emailText)
                         this.setState({ email: 
                             { value : emailText.value, valid : true }
                         })
                     } else {
+                        /** If the email is unavailable, make the email element invalid
+                         * and update the 'email' attribute of the state
+                         */
                         this.makeElementInvalid(emailText)
                         this.setState({ email : 
                             { value : emailText.value, valid : false, error : "This email is already in use"}
                         })
                     }
                 } )
-
-                this.makeElementValid(emailText)
             } else {
+                /** If the email format is invalid, make the element invalid and 
+                 * update the 'email' attribute of the state
+                 */
                 this.makeElementInvalid(emailText)
                 this.setState({ email :
                     { value : emailText.value, valid : false, error : "Please provide a valid email"}
@@ -89,7 +106,12 @@ class Register extends React.Component{
 
     handleUsernameChange = (event) => {
         const usernameText = event.target
+
         if(usernameText.value === "" || usernameText.value.length < 8){
+            /** If the username is empty of shorter than 8 characters after
+             * the user has already typed in it, make the element invalid
+             * and update the 'username' attribute of the state
+             */
             this.makeElementInvalid(usernameText)
             this.setState({ username : 
                 { value : usernameText.value, valid : false, error : "Username must be at least 8 characters long" }
@@ -107,11 +129,16 @@ class Register extends React.Component{
             .then( res => res.json() )
             .then( data => {
                 if(data.available === true){
+                    /* If the username is available, make the element valid 
+                    and update 'username' attribute of the state. */
                     this.makeElementValid(usernameText)
                     this.setState({ username:
                         { value : usernameText.value, valid : true }
                     })
                 } else {
+                    /** If the username is not available, make the element incalid
+                     * and update the 'username' attribute od the state
+                     */
                     this.makeElementInvalid(usernameText)
                     this.setState({ username : 
                         { value : usernameText.value, valid : false, error : "Username unavailable" }
@@ -123,14 +150,22 @@ class Register extends React.Component{
 
     handlePasswordChange = (event) => {
         const passwordText = event.target
+
+        // Retrieve confirm password element as its values are relevant here
         const confirmPasswordText = this.confirmPasswordRef.current
 
         if(passwordText.value === ""){
+            /** If password element is empty after the user has already typed in it, 
+             * make the element invalid and update the 'password' attribute of the state
+             */
             this.makeElementInvalid(passwordText)
             this.setState({ password :
                 { value : passwordText.value, valid : false,  error : "Please create a password"}
             })
         } else {
+            /** If the password is not empty, make the element valid and 
+             * update the 'password' attribute of the state
+             */
             this.makeElementValid(passwordText)
             this.setState({ password :
                 { value : passwordText.value, valid : true }
@@ -138,11 +173,19 @@ class Register extends React.Component{
         }
 
         if(passwordText.value !== confirmPasswordText.value){
+            /** If current typed password text is not equal to current typed confirmPassword text,
+             * make the confirmPasswordText element invalid and update the 'confirmPassword'
+             * attribute of the state
+              */
             this.makeElementInvalid(confirmPasswordText)
             this.setState({confirmPassword : 
                 { value : confirmPasswordText.value, valid : false, error : "Passwords don't match" }
             })
         } else {
+            /** If current typed password text is equal to current typed confirmPassword text AND
+             * is not empty, make the confirmPasswordText element valid and update 
+             * the 'confirmPassword' attribute of the state
+              */
             if(passwordText.value !== ""){
                 this.makeElementValid(confirmPasswordText)
                 this.setState({ confirmPassword :
@@ -156,11 +199,19 @@ class Register extends React.Component{
         const confirmPasswordText = event.target
 
         if(confirmPasswordText.value !== this.state.password.value){
+            /** If confirmPasswort text is not equal to the current state of the
+             * password, make this element invalid and update the 'confirmPassword'
+             * attribute of the state
+             */
             this.makeElementInvalid(confirmPasswordText)
             this.setState({ confirmPassword : 
                 { value : confirmPasswordText.value, valid : false} 
             })
         } else {
+            /** If confirmPassword text is equal to current state od the password,
+             * AND the current state of the password is NOT empty, set this element 
+             * to valid and update the 'confirmPassword' attribute of the state
+             */
             if(this.state.password.value !== ""){
                 this.makeElementValid(confirmPasswordText)
                 this.setState({ confirmPassword :
@@ -180,7 +231,23 @@ class Register extends React.Component{
                 return // End the form submission as soon as an invalid property is detected
             }
         } )
+        console.log("All values valid!")
+
         // Make the API call to register the user
+
+        fetch(this.props.base_url + "/api/user/register", {
+            method : 'POST',
+            headers: {
+                'Accept' : 'application/json',
+            },
+            body : new URLSearchParams(new FormData(event.target))
+        })
+        .then( res => res.json() )
+        .then( user => {
+            // Save data in localStorage
+            localStorage.setItem('user', JSON.stringify(user))
+            this.props.getUser()
+        } )
     }
 
     render(){
@@ -224,19 +291,19 @@ class Register extends React.Component{
                     <label>Gender: </label>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="gender" id="maleRadio" value="male"></input>
-                        <label className="form-check-label" for="maleRadio">
+                        <label className="form-check-label" htmlFor="maleRadio">
                             Male
                         </label>
                     </div>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="gender" id="femaleRadio" value="female"></input>
-                        <label className="form-check-label" for="femaleRadio">
+                        <label className="form-check-label" htmlFor="femaleRadio">
                             Female
                         </label>
                     </div>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="gender" id="otherRadio" value="other"></input>
-                        <label className="form-check-label" for="otherRadio">
+                        <label className="form-check-label" htmlFor="otherRadio">
                             Other
                         </label>
                     </div>

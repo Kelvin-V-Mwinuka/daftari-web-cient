@@ -15,19 +15,23 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount(){
+  getUser = () => {
     // Read user data from local storage, if it's not null, store it to the state
-    const userData = JSON.parse(localStorage.getItem('userData'))
+    const userData = JSON.parse(localStorage.getItem('user'))
     if(userData !== null){
       this.setState({user : userData})
     }
+  }
+
+  componentDidMount(){
+    this.getUser()
   }
 
   render(){
     return (
       <div>
         { this.state.user === null ? 
-            <Auth base_url={this.state.base_url} /> : 
+            <Auth  getUser={this.getUser} base_url={this.state.base_url} /> : 
             <Main base_url={this.state.base_url} user={this.state.user} /> 
         }
       </div>

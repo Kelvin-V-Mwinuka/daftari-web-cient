@@ -22,10 +22,10 @@ class Auth extends React.Component {
                 </ul>
                 <div className="tab-content" id="pills-tabContent">
                     <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <Login base_url={this.props.base_url} />
+                        <Login getUser={this.props.getUser} base_url={this.props.base_url} />
                     </div>
                     <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <Register base_url={this.props.base_url} />
+                        <Register getUser={this.props.getUser} base_url={this.props.base_url} />
                     </div>
                 </div>
             </div>
