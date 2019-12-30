@@ -32,7 +32,7 @@ class App extends React.Component {
       <div>
         { this.state.user === null ? 
             <Auth  getUser={this.getUser} base_url={this.state.base_url} /> : 
-            <Main base_url={this.state.base_url} user={this.state.user} /> 
+            <Main base_url={this.state.base_url} user={this.state.user} />
         }
       </div>
     )
