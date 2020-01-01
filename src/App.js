@@ -15,6 +15,12 @@ class App extends React.Component {
     }
   }
 
+  logout = () => {
+    // Delete user details from local storage and reset state
+    localStorage.removeItem('user')
+    this.setState({ user : null })
+  }
+
   getUser = () => {
     // Read user data from local storage, if it's not null, store it to the state
     const userData = JSON.parse(localStorage.getItem('user'))
@@ -31,8 +37,8 @@ class App extends React.Component {
     return (
       <div>
         { this.state.user === null ? 
-            <Auth  getUser={this.getUser} base_url={this.state.base_url} /> : 
-            <Main base_url={this.state.base_url} user={this.state.user} />
+            <Auth base_url={this.state.base_url} getUser={this.getUser} /> : 
+            <Main base_url={this.state.base_url} user={this.state.user} logout={this.logout} />
         }
       </div>
     )

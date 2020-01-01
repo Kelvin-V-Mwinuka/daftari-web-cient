@@ -1,6 +1,18 @@
 import React from 'react'
 
+// Import components
+import AddJournal from './AddJournal'
+import AddNote from './AddNote'
+import Profile from './Profile/Profile'
+import Explore from './Explore/Explore'
+import Settings from './Settings'
+
 class Main extends React.Component{
+
+    componentDidMount(){
+        console.log(this.props.user)
+    }
+
     render(){
 
         return(
@@ -36,8 +48,8 @@ class Main extends React.Component{
                             Settings
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">
+                    <li className="nav-item" onClick={this.props.logout} >
+                        <a className="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-settings" role="tab" aria-selected="false">
                             Logout
                         </a>
                     </li>
@@ -47,19 +59,19 @@ class Main extends React.Component{
                         Home
                     </div>
                     <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
-                        Profile
+                        <Profile user={this.props.user} />
                     </div>
                     <div className="tab-pane fade" id="pills-explore" role="tabpanel" aria-labelledby="pills-home-tab">
-                        Explore
+                        <Explore />
                     </div>
                     <div className="tab-pane fade" id="pills-add-journal" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        Add Journal
+                        <AddJournal base_url={this.props.base_url} user={this.props.user} />
                     </div>
                     <div className="tab-pane fade" id="pills-add-note" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        Add Note
+                        <AddNote user={this.props.user} />
                     </div>
                     <div className="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        Settings
+                        <Settings user={this.props.user} />
                     </div>
                 </div>
             </div>

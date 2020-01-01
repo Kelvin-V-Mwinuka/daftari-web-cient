@@ -1,4 +1,5 @@
 import React from 'react'
+import buildUrl from 'build-url'
 
 class Login extends React.Component{
     
@@ -9,21 +10,28 @@ class Login extends React.Component{
 
     handleLogin = (event) => {
         event.preventDefault()
-        fetch(this.props.base_url + "/api/user/authenticate", {
-            method : 'POST',
-            headers: {
-                'Accept' : 'application/json'
-            },
-            body: new URLSearchParams(new FormData(event.target))
+
+        const formData = new FormData(event.target);
+
+        // Build the URL
+        const url = buildUrl(this.props.base_url, {
+            path : "/api/user/authenticate",
+            queryParams : {
+                username : formData.get('username'),
+                password : formData.get('password')
+            }
         })
-        .then( res => {
-            if(!res.ok){
-                this.alert.current.classList.remove('d-md-none')
-                return
-            } 
-            // Response is ok, save to localStorage and retrieve user
-            localStorage.setItem('user', JSON.stringify(res.json()))
-            this.props.getUser()
+
+        fetch(url, { method : 'POST' })
+        .then( res => res.json() )
+        .then( data => {
+            if( ('statusCode' in data) || ('message' in data)){
+                console.log(data)
+            } else {
+                // Save the user to local storage if they are successfully retrieved
+                localStorage.setItem('user', JSON.stringify(data))
+                this.props.getUser()
+            }
         } )
     }
 
