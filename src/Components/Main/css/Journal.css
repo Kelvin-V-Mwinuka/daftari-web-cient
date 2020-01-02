@@ -6,3 +6,7 @@
 #tags-input {
     resize: none;
 }
+
+.journal-card {
+    width: 25rem;
+}

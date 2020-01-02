@@ -1,3 +1,15 @@
 * {
     margin: 5px;
 }
+
+.input-group-text{
+    margin: 0px;
+}
+
+.input-group-prepend{
+    margin: 0px;
+}
+
+.custom-select{
+    margin: 0px;
+}
