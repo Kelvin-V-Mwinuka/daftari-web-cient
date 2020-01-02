@@ -68,7 +68,7 @@ class Main extends React.Component{
                         <AddJournal base_url={this.props.base_url} user={this.props.user} />
                     </div>
                     <div className="tab-pane fade" id="pills-add-note" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <AddNote user={this.props.user} />
+                        <AddNote base_url={this.props.base_url} user={this.props.user} />
                     </div>
                     <div className="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <Settings user={this.props.user} />

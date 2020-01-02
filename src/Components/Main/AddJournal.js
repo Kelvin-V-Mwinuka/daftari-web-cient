@@ -1,8 +1,6 @@
 import React from 'react'
 import autosize from 'autosize'
-import buildUrl from 'build-url'
 import './css/Journal.css'
-import BuildUrl from 'build-url'
 
 class AddJournal extends React.Component{
     
@@ -23,13 +21,6 @@ class AddJournal extends React.Component{
     
     onTitleChange = (event) => {
         var newTitle = event.target.value.trim()
-        
-        if(newTitle.length > 0){
-            this.submitButton.current.classList.remove("disabled")
-        } else {
-            this.submitButton.current.classList.add("disabled")
-        }
-
         this.setState({ title : newTitle })
     }
 
@@ -57,14 +48,12 @@ class AddJournal extends React.Component{
         this.setState({ tags : tagList.map( (tag) => {
             return tag.trim()
         } ) })
-        console.log(this.state.tags)
     }
 
     handleSubmit = (event) => {
         event.preventDefault()
-        // Check if button is enabled before carrying on
-        if(!this.submitButton.current.classList.contains("disabled")){
-
+        // Check if title is provided
+        if(!(this.state.title === "")){
             const data = new FormData()
             data.append('title', this.state.title)
             data.append('description', this.state.description)
@@ -84,6 +73,8 @@ class AddJournal extends React.Component{
             .then( data => {
                 console.log(data)
             })
+        } else {
+            // Display error to user
         }
     }
 
@@ -92,11 +83,11 @@ class AddJournal extends React.Component{
             <form onSubmit={this.handleSubmit} >
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <input type="text" onChange={this.onTitleChange} className="form-control" id="title" name="title" placeholder="Journal Title"></input>
+                    <input onChange={this.onTitleChange} type="text" className="form-control" id="title" name="title" placeholder="Note Title"></input>
                 </div>
                 <div className="form-check">
                     <input onClick={this.onPrivacyChange} type="checkbox" className="form-check-input" id="private" name="private" aria-describedby="privateHelp"></input>
-                    <label className="form-check-label" htmlFor="private">Private Journal</label>
+                    <label className="form-check-label" htmlFor="private">Private</label>
                     <small id="privateHelp" className="form-text text-muted">
                         All notes created in a private journal will automatically be private
                     </small>
@@ -123,7 +114,7 @@ class AddJournal extends React.Component{
                     <textarea className="form-control" onChange={this.onDescriptionChange} id="description-input" name="description-input" placeholder="Description" aria-describedby="descriptionHelp"></textarea>
                 </div>
 
-                <button ref={this.submitButton} type="submit" className="btn btn-primary disabled">
+                <button ref={this.submitButton} type="submit" className="btn btn-primary">
                     Create Journal</button>
             </form>
         )   
