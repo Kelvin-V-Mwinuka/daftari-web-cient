@@ -1,7 +1,22 @@
 import React from 'react'
 import './css/Note.css'
 
+// Import images
+import unliked from '../../img/unliked.svg'
+import liked from '../../img/liked.svg'
+
 class Note extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            liked : false
+        }
+    }
+
+    componentDidMount(){
+        this.setState({ liked : this.props.note.likes.includes(this.props.user._id) })
+    }
 
     getPrivateStatus = () => {
         if(this.props.note.private === "true"){
@@ -10,7 +25,25 @@ class Note extends React.Component {
         return "Public"
     }
 
-    likeNote = () => {
+    getLikeButton = () => {
+        if(!this.state.liked){
+            return <button onClick={this.likeNote} className="btn btn-secondary like-button">
+                <span>
+                    <img className="like-icon" src={unliked} alt="Liked icon"></img>
+                </span>
+                Like
+                </button>
+        } else {
+            return <button onClick={this.likeNote} className="btn btn-secondary like-button">
+                <span>
+                    <img className="like-icon" src={liked} alt="Unliked icon"></img>
+                </span>
+                Unlike
+                </button>
+        }
+    }
+
+    likeNote = (event) => {
         var data = new FormData()
         data.append('note_id', this.props.note._id)
         data.append('user_id', this.props.user._id)
@@ -22,7 +55,9 @@ class Note extends React.Component {
         })
         .then( res => res.json() )
         .then( data => {
-            console.log(data)
+            if('message' in data){
+                this.setState({ liked : data.message === "Liked" })
+            }
         } )
     }
 
@@ -30,7 +65,7 @@ class Note extends React.Component {
         return (
             <div className="card note-card shadow-lg">
                 <div className="card-body">
-                    <h5 className="card-title note-title" onClick={this.likeNote}>{this.props.note.title}</h5>
+                    <h5 className="card-title note-title">{this.props.note.title}</h5>
                     <p className="card-text note-text">
                         {this.props.note.text}
                     </p>
@@ -40,6 +75,9 @@ class Note extends React.Component {
                                 return <span key={tag.trim()} className="badge badge-success">{tag.trim()}</span>
                             })
                         }
+                    </p>
+                    <p>
+                        { this.getLikeButton() }
                     </p>
                 </div>
             </div>

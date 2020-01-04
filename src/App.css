@@ -36,6 +36,23 @@ body {
     border: 0px;
 }
 
+.like-button {
+    background-color: #f8f8f8 !important;
+    color: #2E4053 !important;
+    padding-left: 2px;
+}
+
+.like-button:hover{
+    color: #2E4053;
+}
+
+.like-icon {
+    height: 20px;
+    width: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .input-group-text{
     margin: 0px;
 }
