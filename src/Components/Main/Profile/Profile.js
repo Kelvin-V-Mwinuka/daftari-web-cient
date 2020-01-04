@@ -12,8 +12,14 @@ class Profile extends React.Component{
         super(props)
         this.state = {
             journals : [],
-            notes : []
+            notes : [],
+            liked_notes : []
         }
+    }
+
+    componentDidMount(){
+        this.getJournals()
+        this.getNotes()
     }
 
     getJournals = () => {
@@ -48,9 +54,8 @@ class Profile extends React.Component{
         } )
     }
 
-    componentDidMount(){
-        this.getJournals()
-        this.getNotes()
+    getLikedNotes = () => {
+        
     }
 
     render(){

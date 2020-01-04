@@ -1,4 +1,5 @@
 import React from 'react'
+import buildUrl from 'build-url'
 
 // Import components
 import AddJournal from './AddJournal'
@@ -10,6 +11,37 @@ import Explore from './Explore/Explore'
 import Settings from './Settings' */
 
 class Main extends React.Component{
+
+    constructor(props){
+        super(props)
+
+        this.state = {
+            journals : [],
+            notes : [],
+            liked_notes : [],
+            selected_journal : null
+        }
+    }
+
+    componentDidMount(){
+        this.getLikedNotes()
+    }
+
+    getLikedNotes = () => {
+        const url = buildUrl(this.props.base_url, {
+            path : "/api/notes/liked",
+            queryParams : {
+                user_id : this.props.user._id
+            }
+        })
+        fetch(url, { method : 'GET', headers : { 'Accept' : 'application/json' } })
+        .then( res => res.json() )
+        .then( data => {
+            if('notes' in data){
+                console.log(data.notes)
+            }
+        } )
+    }
 
     render(){
 

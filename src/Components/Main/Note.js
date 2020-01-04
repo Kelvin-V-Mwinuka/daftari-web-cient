@@ -55,8 +55,8 @@ class Note extends React.Component {
         })
         .then( res => res.json() )
         .then( data => {
-            if('message' in data){
-                this.setState({ liked : data.message === "Liked" })
+            if('action' in data){
+                this.setState({ liked : data.action === "Liked" })
             }
         } )
     }

@@ -27,7 +27,7 @@ body {
 
 /* active nav link */
 .nav-pills .nav-link{
-    background-color: #2E4053 !important; 
+    background-color: #2E4053 !important;
     color: white;
 }
 
@@ -36,10 +36,15 @@ body {
     border: 0px;
 }
 
+.btn-primary:hover {
+    background-color: #f8f8f8;
+    color: #2E4053;
+}
+
 .like-button {
     background-color: #f8f8f8 !important;
     color: #2E4053 !important;
-    padding-left: 2px;
+    padding-left: 8px;
 }
 
 .like-button:hover{
