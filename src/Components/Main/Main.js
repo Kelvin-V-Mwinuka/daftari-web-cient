@@ -11,10 +11,6 @@ import Settings from './Settings' */
 
 class Main extends React.Component{
 
-    componentDidMount(){
-        console.log(this.props.user)
-    }
-
     render(){
 
         return(
@@ -26,7 +22,7 @@ class Main extends React.Component{
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-home" aria-selected="false">
+                        <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
                             Profile
                         </a>
                     </li>
@@ -37,12 +33,12 @@ class Main extends React.Component{
                         </a>
                     </li> */}
                     <li className="nav-item">
-                        <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-add-journal" role="tab" aria-controls="pills-profile" aria-selected="false">
+                        <a className="nav-link" id="pills-journal-tab" data-toggle="pill" href="#pills-add-journal" role="tab" aria-controls="pills-add-journal" aria-selected="false">
                             Add Journal
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-add-note" role="tab" aria-controls="pills-contact" aria-selected="false">
+                        <a className="nav-link" id="pills-note-tab" data-toggle="pill" href="#pills-add-note" role="tab" aria-controls="pills-add-note" aria-selected="false">
                             Add Note
                         </a>
                     </li>
@@ -53,7 +49,7 @@ class Main extends React.Component{
                         </a>
                     </li>*/}
                     <li className="nav-item" onClick={this.props.logout} >
-                        <a className="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-settings" role="tab" aria-selected="false">
+                        <a className="nav-link" id="pills-logout-tab" data-toggle="pill" href="#pills-settings" role="tab" aria-selected="false">
                             Logout
                         </a>
                     </li>

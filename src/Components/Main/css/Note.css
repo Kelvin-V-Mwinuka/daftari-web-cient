@@ -1,4 +1,18 @@
 
+#text-input {
+    resize: none;
+}
+
 .note-card {
-    width: 18rem;
+    width: 25rem;
+    background-color:  #2E4053;
+}
+
+.note-title {
+    color: #6FE11B;
+    font-size: 15px;
+}
+
+.note-text {
+    color: white;
 }

@@ -252,7 +252,7 @@ class Register extends React.Component{
 
     render(){
         return (
-            <form onSubmit={this.handleFormSubmit}>
+            <form className="auth-form" onSubmit={this.handleFormSubmit}>
                 <div className="form-group">
                     <label forhtml="email">Name</label>
                     <input onChange={this.handleNameChange} type="text" className="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder="Enter name"></input>

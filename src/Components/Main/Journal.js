@@ -1,6 +1,8 @@
 import React from 'react'
 import './css/Journal.css'
 
+// Import logos
+
 class Journal extends React.Component {
 
     getPrivateStatus = (journal) => {
@@ -12,15 +14,13 @@ class Journal extends React.Component {
 
     render(){
         return(
-            <div>
-                {
                     this.props.journal === null ?
                 
                     // Display card showing empty journal
-                    <div className="card journal-card">
+                    <div className="card journal-card shadow-lg">
                         <div className="card-body">
-                            <h5 className="card-title">No Journal</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">
+                            <h5 className="card-title journal-title">No Journal</h5>
+                            <h6 className="card-text journal-text">
                                 Displaying notes that don't belong to any journal
                             </h6>
                         </div>
@@ -29,21 +29,23 @@ class Journal extends React.Component {
                     :
                 
                     // Display card showing journal details
-                    <div className="card journal-card">
+                    <div className="card journal-card shadow-lg">
                         <div className="card-body">
-                            <h5 className="card-title">{this.props.journal.title}</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">
-                                {this.getPrivateStatus(this.props.journal)}
-                            </h6>
-                            <p className="card-text">
+                            <h5 className="card-title journal-title">
+                                {this.props.journal.title}
+                            </h5>
+                            <p className="card-text journal-text">
                                 {this.props.journal.description}
                             </p>
-                            <a href="#" className="card-link">Edit</a>
-                            <a href="#" className="card-link">Delete</a>
+                            <p>
+                                {
+                                    this.props.journal.tags.split(",").map( tag => {
+                                        return <span className="badge badge-warning">{tag.trim()}</span>
+                                    })
+                                }
+                            </p>
                         </div>
                     </div>
-                }
-            </div>
         )
     }
 }

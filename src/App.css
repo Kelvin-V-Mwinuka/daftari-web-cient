@@ -1,5 +1,39 @@
 * {
     margin: 5px;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+.auth-form {
+    width: 30rem;
+}
+
+.data-form {
+    width: 30rem;
+}
+
+.form-control {
+    border: 0px;
+}
+
+/* inactive nav link */
+.nav-pills .nav-link:not(.active) {
+    background-color: #f8f8f8 !important;
+    color: #2E4053;
+}
+
+/* active nav link */
+.nav-pills .nav-link{
+    background-color: #2E4053 !important; 
+    color: white;
+}
+
+.btn-primary {
+    background-color: #2E4053;
+    border: 0px;
 }
 
 .input-group-text{
@@ -11,5 +45,22 @@
 }
 
 .custom-select{
-    margin: 0px;
+    width: 25rem;
+    border: 0px;
+}
+
+.home-input {
+    width: 20rem;
+}
+
+.notes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px; /* gutter size offset */
+    width: max-content;
+}
+
+.notes-column {
+    padding-left: 0px; /* gutter size */
+    background-clip: padding-box;
 }

@@ -9,4 +9,21 @@
 
 .journal-card {
     width: 25rem;
+    background-color:  #2E4053;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+}
+
+.journal-title {
+    color:  #FCE501;
+    font-size: 15px;
+}
+
+.journal-subtitle {
+    color: grey;
+}
+
+.journal-text {
+    color: white;
 }

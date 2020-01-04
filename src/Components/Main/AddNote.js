@@ -111,7 +111,7 @@ class AddNote extends React.Component{
 
     render(){
         return (
-            <form onSubmit={this.handleSubmit} >
+            <form className="data-form" onSubmit={this.handleSubmit} >
                 <div className="form-group">
                     <label htmlFor="journal-select">Journal</label>
                     <select onChange={this.onJournalChange} className="form-control" id="journal-select" name="journal-select">
@@ -155,7 +155,7 @@ class AddNote extends React.Component{
                 </div>
 
                 <button type="submit" className="btn btn-primary">
-                    Create Journal</button>
+                    Create Note</button>
             </form>
         )
     }

@@ -80,7 +80,7 @@ class AddJournal extends React.Component{
 
     render(){
         return (
-            <form onSubmit={this.handleSubmit} >
+            <form className="data-form" onSubmit={this.handleSubmit} >
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
                     <input onChange={this.onTitleChange} type="text" className="form-control" id="title" name="title" placeholder="Note Title"></input>

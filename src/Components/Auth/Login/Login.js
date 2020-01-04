@@ -37,7 +37,7 @@ class Login extends React.Component{
 
     render(){
         return (
-            <form onSubmit={this.handleLogin}>
+            <form className="auth-form" onSubmit={this.handleLogin}>
                 <div className="form-group">
                 <div ref={this.alert} className="alert alert-danger d-md-none" role="alert">
                     Wrong username/email or password

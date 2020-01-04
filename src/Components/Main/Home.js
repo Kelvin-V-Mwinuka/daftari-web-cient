@@ -1,5 +1,6 @@
 import React from 'react'
 import buildUrl from 'build-url'
+import Masonry from 'react-masonry-css'
 
 // Import components
 import Journal from './Journal'
@@ -15,6 +16,13 @@ class Home extends React.Component {
             notes : [],
             selected_journal : null
         }
+
+        this.breakpointColumnsObj = {
+            default: 4,
+            1100: 3,
+            700: 1,
+            500: 1
+          };
     }
 
     getJournals = () => {
@@ -30,7 +38,6 @@ class Home extends React.Component {
         .then( data => {
            if('journals' in data){
                this.setState({ journals : data.journals })
-               console.log(data.journals)
            }
         })
     }
@@ -89,10 +96,7 @@ class Home extends React.Component {
     render(){
         return(
             <div>
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <label className="input-group-text" htmlFor="joutnal-select">Journal</label>
-                    </div>
+                <div className="d-flex flex-row">
                     <select onChange={this.onJournalChange} className="custom-select" id="journal-select">
                         <option value="">No Journal</option>
                         {
@@ -104,10 +108,13 @@ class Home extends React.Component {
                         }
                     </select>
                 </div>
-                <div>
+                <div className="d-flex flex-row">
                     <Journal base_url={this.props.base_url} user={this.props.user} journal={this.state.selected_journal} />
                 </div>
-                <div>
+                <Masonry
+                breakpointCols={this.breakpointColumnsObj}
+                className="notes-grid"
+                columnClassName="notes-column" >
                     {
                         this.state.notes.map( note => {
                             return <Note key={note._id}
@@ -116,7 +123,7 @@ class Home extends React.Component {
                                          note={note} />
                         })
                     }
-                </div>
+                </Masonry>
             </div>
         )
     }
