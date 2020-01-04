@@ -40,7 +40,7 @@ class Journal extends React.Component {
                             <p>
                                 {
                                     this.props.journal.tags.split(",").map( tag => {
-                                        return <span className="badge badge-warning">{tag.trim()}</span>
+                                        return <span key={tag} className="badge badge-warning">{tag.trim()}</span>
                                     })
                                 }
                             </p>

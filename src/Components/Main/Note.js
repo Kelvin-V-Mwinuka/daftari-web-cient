@@ -7,15 +7,14 @@ import liked from '../../img/liked.svg'
 
 class Note extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.state = {
-            liked : false
+    noteLiked = () => {
+        // Check if the note has been liked
+        for(var i=0; i < this.props.liked_notes.length; i++){
+            if(this.props.liked_notes[i]._id === this.props.note._id){
+                return true
+            }
         }
-    }
-
-    componentDidMount(){
-        this.setState({ liked : this.props.note.likes.includes(this.props.user._id) })
+        return false
     }
 
     getPrivateStatus = () => {
@@ -26,7 +25,9 @@ class Note extends React.Component {
     }
 
     getLikeButton = () => {
-        if(!this.state.liked){
+        this.noteLiked()
+        if(!this.noteLiked()){
+            console.log("Liked")
             return <button onClick={this.likeNote} className="btn btn-secondary like-button">
                 <span>
                     <img className="like-icon" src={unliked} alt="Liked icon"></img>
@@ -34,6 +35,7 @@ class Note extends React.Component {
                 Like
                 </button>
         } else {
+            console.log("Not liked")
             return <button onClick={this.likeNote} className="btn btn-secondary like-button">
                 <span>
                     <img className="like-icon" src={liked} alt="Unliked icon"></img>
@@ -56,7 +58,8 @@ class Note extends React.Component {
         .then( res => res.json() )
         .then( data => {
             if('action' in data){
-                this.setState({ liked : data.action === "Liked" })
+                // Get liked notes
+                this.props.getLikedNotes()
             }
         } )
     }

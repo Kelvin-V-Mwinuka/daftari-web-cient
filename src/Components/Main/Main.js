@@ -24,10 +24,75 @@ class Main extends React.Component{
     }
 
     componentDidMount(){
+        // Get user's journals
+        this.getJournals()
+        // Get user's notes for current selected journal
+        this.getNotes()
+        // Get user's liked notes
         this.getLikedNotes()
     }
 
+    getJournals = () => {
+        // Retrieve all of the user's journals
+        const url = buildUrl(this.props.base_url, {
+            path : "api/journals/retrieve",
+            queryParams : {
+                user_id : this.props.user._id
+            }
+        })
+        fetch(url)
+        .then( res => res.json() )
+        .then( data => {
+           if('journals' in data){
+               this.setState({ journals : data.journals })
+           }
+        })
+    }
+
+    getNotes = () => {
+        // Retrieve all of the user's notes from the selected journal
+        var id = null
+
+        this.state.selected_journal === null ? id = '' : id = this.state.selected_journal._id
+
+        const url = buildUrl(this.props.base_url, {
+            path : "/api/notes/retrieve",
+            queryParams : {
+                user_id : this.props.user._id,
+                journal_id : id
+            }
+        })
+
+        fetch(url, { method : 'GET', headers : { 'Accept' : 'application/json' } })
+        .then( res => res.json() )
+        .then( data => {
+            if('notes' in data){
+                this.setState({ notes : data.notes })
+            }
+        })
+    }
+
+    setSelectedJournal = (id) => {
+        // Set selected journal to null if no id value is provided (i.e No Journal selected)
+        if(id === ""){
+            this.setState({ selected_journal : null }, () => {
+                // Retrieve notes after setState is finished
+                this.getNotes()
+            })
+        }
+        // Otherwise, select the appropriate journal
+        this.state.journals.forEach( journal => {
+            if(journal._id === id){
+                this.setState({ selected_journal : journal }, () => {
+                    // Retrieve the selected journal's notes after setState is finished
+                    this.getNotes()
+                })
+            }
+        } ) 
+    }
+
     getLikedNotes = () => {
+        console.log("Liked notes retrieved")
         const url = buildUrl(this.props.base_url, {
             path : "/api/notes/liked",
             queryParams : {
@@ -38,7 +103,7 @@ class Main extends React.Component{
         .then( res => res.json() )
         .then( data => {
             if('notes' in data){
-                console.log(data.notes)
+                this.setState({ liked_notes : data.notes })
             }
         } )
     }
@@ -88,10 +153,24 @@ class Main extends React.Component{
                 </ul>
                 <div className="tab-content" id="pills-tabContent">
                     <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <Home base_url={this.props.base_url} user={this.props.user} />
+                        <Home
+                        base_url={this.props.base_url} 
+                        user={this.props.user}
+                        journals={this.state.journals}
+                        notes={this.state.notes}
+                        liked_notes={this.state.liked_notes}
+                        selected_journal={this.state.selected_journal}
+                        setSelectedJournal={this.setSelectedJournal}
+                        getLikedNotes={this.getLikedNotes} />
                     </div>
                     <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <Profile base_url={this.props.base_url} user={this.props.user} />
+                        <Profile
+                        base_url={this.props.base_url} 
+                        user={this.props.user}
+                        journal={this.state.journals}
+                        notes={this.state.notes}
+                        liked_notes={this.state.liked_notes}
+                        selected_journal={this.state.selected_journal} />
                     </div>
                     {/*
                     <div className="tab-pane fade" id="pills-explore" role="tabpanel" aria-labelledby="pills-home-tab">
