@@ -167,10 +167,10 @@ class Main extends React.Component{
                         <Profile
                         base_url={this.props.base_url} 
                         user={this.props.user}
-                        journal={this.state.journals}
+                        journals={this.state.journals}
                         notes={this.state.notes}
                         liked_notes={this.state.liked_notes}
-                        selected_journal={this.state.selected_journal} />
+                        getLikedNotes={this.getLikedNotes} />
                     </div>
                     {/*
                     <div className="tab-pane fade" id="pills-explore" role="tabpanel" aria-labelledby="pills-home-tab">

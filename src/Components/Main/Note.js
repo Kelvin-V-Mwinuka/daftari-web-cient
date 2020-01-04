@@ -27,7 +27,6 @@ class Note extends React.Component {
     getLikeButton = () => {
         this.noteLiked()
         if(!this.noteLiked()){
-            console.log("Liked")
             return <button onClick={this.likeNote} className="btn btn-secondary like-button">
                 <span>
                     <img className="like-icon" src={unliked} alt="Liked icon"></img>
@@ -35,7 +34,6 @@ class Note extends React.Component {
                 Like
                 </button>
         } else {
-            console.log("Not liked")
             return <button onClick={this.likeNote} className="btn btn-secondary like-button">
                 <span>
                     <img className="like-icon" src={liked} alt="Unliked icon"></img>
