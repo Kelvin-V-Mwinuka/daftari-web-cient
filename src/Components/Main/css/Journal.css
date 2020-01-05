@@ -27,3 +27,9 @@
 .journal-text {
     color: white;
 }
+
+@media (max-width : 600px){
+    .journal-card {
+        width: 18rem;
+    }
+}

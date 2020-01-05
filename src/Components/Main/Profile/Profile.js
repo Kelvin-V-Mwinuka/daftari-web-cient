@@ -1,6 +1,5 @@
 import React from 'react'
 import '../css/Profile.css'
-import buildUrl from 'build-url'
 
 // Import components
 import UserInfo from './UserInfo'

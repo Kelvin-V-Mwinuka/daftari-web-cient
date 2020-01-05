@@ -92,7 +92,6 @@ class Main extends React.Component{
     }
 
     getLikedNotes = () => {
-        console.log("Liked notes retrieved")
         const url = buildUrl(this.props.base_url, {
             path : "/api/notes/liked",
             queryParams : {
@@ -145,8 +144,8 @@ class Main extends React.Component{
                             Settings
                         </a>
                     </li>*/}
-                    <li className="nav-item" onClick={this.props.logout} >
-                        <a className="nav-link" id="pills-logout-tab" data-toggle="pill" href="#pills-settings" role="tab" aria-selected="false">
+                    <li className="nav-item">
+                        <a className="nav-link" id="pills-logout-tab" data-toggle="modal" data-target="#logoutModal" aria-selected="false">
                             Logout
                         </a>
                     </li>
@@ -187,6 +186,19 @@ class Main extends React.Component{
                         <Settings user={this.props.user} />
                     </div>
                     */}
+                </div>
+
+                {/* Logout Modal */}
+                <div className="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                    <div className="modal-body">
+                        <p>Are you sure you want to log out?</p>
+                        <button type="button" className="btn btn-secondary note-button" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.props.logout}>Logout</button>
+                    </div>
+                    </div>
+                </div>
                 </div>
             </div>
         )

@@ -7,6 +7,10 @@ body {
     background-color: #f8f8f8;
 }
 
+.modal-content {
+    background-color: #f8f8f8;
+}
+
 .auth-form {
     width: 30rem;
 }
@@ -41,19 +45,22 @@ body {
     color: #2E4053;
 }
 
-.like-button {
+.note-button {
     background-color: #f8f8f8 !important;
     color: #2E4053 !important;
     padding-left: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 0px;
 }
 
-.like-button:hover{
+.note-button:hover{
     color: #2E4053;
 }
 
-.like-icon {
-    height: 20px;
-    width: 20px;
+.note-icon {
+    height: 12px;
+    width: auto;
     margin-left: 0px;
     margin-right: 0px;
 }
@@ -85,4 +92,13 @@ body {
 .notes-column {
     padding-left: 0px; /* gutter size */
     background-clip: padding-box;
+}
+
+@media (max-width : 600px){
+    * {
+        float: left;
+    }
+    .custom-select{
+        width: 18rem;
+    }
 }

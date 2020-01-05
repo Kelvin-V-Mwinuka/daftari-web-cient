@@ -1,4 +1,6 @@
 
+
+
 #text-input {
     resize: none;
 }
@@ -15,4 +17,10 @@
 
 .note-text {
     color: white;
+}
+
+@media (max-width : 600px){
+    .note-card {
+        width: 18rem;
+    }
 }

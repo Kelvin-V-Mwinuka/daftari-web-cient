@@ -43,12 +43,12 @@ class Home extends React.Component {
                         }
                     </select>
                 </div>
-                <div className="d-flex flex-row">
-                    <Journal 
-                    base_url={this.props.base_url} 
-                    user={this.props.user} 
-                    journal={this.props.selected_journal} />
-                </div>
+
+                <Journal 
+                base_url={this.props.base_url} 
+                user={this.props.user} 
+                journal={this.props.selected_journal} />
+                
                 <Masonry
                 breakpointCols={this.breakpointColumnsObj}
                 className="notes-grid"

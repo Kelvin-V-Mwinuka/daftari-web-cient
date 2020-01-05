@@ -4,6 +4,7 @@ import './css/Note.css'
 // Import images
 import unliked from '../../img/unliked.svg'
 import liked from '../../img/liked.svg'
+import edit from '../../img/edit.svg'
 
 class Note extends React.Component {
 
@@ -27,18 +28,18 @@ class Note extends React.Component {
     getLikeButton = () => {
         this.noteLiked()
         if(!this.noteLiked()){
-            return <button onClick={this.likeNote} className="btn btn-secondary like-button">
+            return <button onClick={this.likeNote} className="btn btn-secondary btn-sm note-button">
                 <span>
-                    <img className="like-icon" src={unliked} alt="Liked icon"></img>
+                    <img className="note-icon" src={unliked} alt="Liked icon"></img>
                 </span>
-                Like
+                <b>Like</b>
                 </button>
         } else {
-            return <button onClick={this.likeNote} className="btn btn-secondary like-button">
+            return <button onClick={this.likeNote} className="btn btn-secondary btn-sm note-button">
                 <span>
-                    <img className="like-icon" src={liked} alt="Unliked icon"></img>
+                    <img className="note-icon" src={liked} alt="Unliked icon"></img>
                 </span>
-                Unlike
+                <b>Unlike</b>
                 </button>
         }
     }
@@ -79,6 +80,13 @@ class Note extends React.Component {
                     </p>
                     <p>
                         { this.getLikeButton() }
+
+                        <button className="btn btn-secondary btn-sm note-button" >
+                            <span>
+                                <img className="note-icon" src={edit} alt="Liked icon"></img>
+                            </span>
+                            <b>Edit</b>
+                        </button>
                     </p>
                 </div>
             </div>
