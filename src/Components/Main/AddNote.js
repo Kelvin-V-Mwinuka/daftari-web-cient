@@ -18,6 +18,7 @@ class AddNote extends React.Component{
         }
 
         this.privateCheckRef = React.createRef()
+        this.journalRef = React.createRef()
     }
 
     componentDidMount(){
@@ -36,6 +37,24 @@ class AddNote extends React.Component{
                 this.setState({ journals : data['journals'] })
             }
         })
+
+        // If a note is passed, set its values on the form
+        if(this.props.note){
+
+            // Set private checkbox to checked
+            this.privateCheckRef.current.checked = (this.props.note.private === "true")
+            // Make journal selection element invisible
+            this.journalRef.current.classList.add('d-none')
+
+            this.setState({
+                title : this.props.note.title,
+                private : this.props.private === "true" ? true : false,
+                text : this.props.note.text,
+                tags : this.props.note.tags.split(",").map( tag => {
+                    return tag.trim()
+                } )
+            })
+        }
     }
 
     onJournalChange = (event) => {
@@ -80,12 +99,40 @@ class AddNote extends React.Component{
         autosize(event.target)
     }
 
+    updateNote = () => {
+        var data = new FormData()
+        data.append("note_id", this.props.note._id)
+        data.append("user_id", this.props.user._id)
+        data.append("title", this.state.title)
+        data.append("private", this.state.private)
+        data.append("text", this.state.text)
+        data.append("tags", this.state.tags)
+
+        fetch(this.props.base_url + "/api/notes/update", {
+            method : 'POST',
+            headers : { 'Accept' : 'application/json' },
+            body : new URLSearchParams(data)
+        })
+        .then( res => res.json() )
+        .then( data => {
+            console.log(data)
+        } )
+    }
+
     handleSubmit = (event) => {
         event.preventDefault()
+
         // Check if either the title or text are provided
         if( this.state.title === "" && this.state.text === ""){
             // Set error
         } else {
+
+            // If a note has been passed in props, call the update method instead
+            if(this.props.note){
+                this.updateNote()
+                return
+            }
+
             // Make API call to insert the note
             var data = new FormData()
             data.append('journal_id', this.state.journal_id)
@@ -112,10 +159,11 @@ class AddNote extends React.Component{
     render(){
         return (
             <form className="data-form" onSubmit={this.handleSubmit} >
-                <div className="form-group">
+                <div className="form-group" ref={this.journalRef}>
                     <label htmlFor="journal-select">Journal</label>
-                    <select onChange={this.onJournalChange} className="form-control" id="journal-select" name="journal-select">
-                        <option vaue="">No Journal</option>
+                    <select onChange={this.onJournalChange} className="form-control" 
+                    id="journal-select" name="journal-select">
+                        <option value="">No Journal</option>
                         {
                             this.state.journals.map( journal => {
                              return <option key={journal._id} value={journal._id} >
@@ -127,10 +175,12 @@ class AddNote extends React.Component{
                 </div>
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <input type="text" onChange={this.onTitleChange} className="form-control" id="title" name="title" placeholder="Journal Title"></input>
+                    <input type="text" onChange={this.onTitleChange} className="form-control" 
+                    id="title" name="title" placeholder="Note Title" value={this.state.title}></input>
                 </div>
                 <div className="form-check">
-                    <input ref={this.privateCheckRef} onClick={this.onPrivacyChange} type="checkbox" className="form-check-input" id="private" name="private" aria-describedby="privateHelp"></input>
+                    <input ref={this.privateCheckRef} onClick={this.onPrivacyChange} type="checkbox" 
+                    className="form-check-input" id="private" name="private" aria-describedby="privateHelp"></input>
                     <label className="form-check-label" htmlFor="private">Private</label>
                     <small id="privateHelp" className="form-text text-muted">
                         All notes created in a private journal will automatically be private
@@ -138,7 +188,9 @@ class AddNote extends React.Component{
                 </div>
                 <div className="form-group">
                     <label htmlFor="tags-input">Tags</label>
-                    <textarea onChange={this.onTagsChange} type="text" className="form-control" id="tags-input" name="tags-input" placeholder="Tags" aria-describedby="tagsHelp"></textarea>
+                    <textarea onChange={this.onTagsChange} type="text" className="form-control" 
+                    id="tags-input" name="tags-input" placeholder="Tags" aria-describedby="tagsHelp"
+                    value={this.state.tags.join(";")}></textarea>
                     <small id="tagsHelp" className="form-text text-muted">
                         Add semi-colon(;) at the end of text to add it to list of tags
                     </small>
@@ -151,11 +203,14 @@ class AddNote extends React.Component{
                 </div>
                 <div className="form-group">
                     <label htmlFor="text-input">Text</label>
-                    <textarea onChange={this.onTextChange} className="form-control" id="text-input" name="text-input" placeholder="Text" aria-describedby="textHelp"></textarea>
+                    <textarea onChange={this.onTextChange} className="form-control" 
+                    id="text-input" name="text-input" placeholder="Text" aria-describedby="textHelp"
+                    value={this.state.text}></textarea>
                 </div>
 
                 <button type="submit" className="btn btn-primary">
-                    Create Note</button>
+                    { this.props.note ? "Update Note" : "Create Note" }
+                </button>
             </form>
         )
     }

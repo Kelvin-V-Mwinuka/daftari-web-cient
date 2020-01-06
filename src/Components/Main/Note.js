@@ -1,6 +1,9 @@
 import React from 'react'
 import './css/Note.css'
 
+// Import components
+import AddNote from './AddNote'
+
 // Import images
 import unliked from '../../img/unliked.svg'
 import liked from '../../img/liked.svg'
@@ -48,12 +51,30 @@ class Note extends React.Component {
     getEditButton = () => {
         // Return edit button if the user owns the note
         if(this.props.user._id === this.props.note.user_id){
-            return <button className="btn btn-secondary btn-sm note-button" >
+
+            const editButton = 
+            <div className="dropdown note-dropdown">
+                <button className="btn btn-secondary btn-sm note-button" id="editButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span>
+                        <img className="note-icon" src={edit} alt="Edit icon"></img>
+                    </span>
+                    <b>Edit</b>
+                </button>
+                <div className="dropdown-menu" aria-labelledby="editButton">
+                    <AddNote 
+                    base_url={this.props.base_url}
+                    user={this.props.user}
+                    note={this.props.note} />
+                </div>
+            </div>
+            return editButton
+            {/** 
+            <button className="btn btn-secondary btn-sm note-button" >
                         <span>
                             <img className="note-icon" src={edit} alt="Edit icon"></img>
                         </span>
                         <b>Edit</b>
-                    </button>
+                    </button> */}
         }
     }
 
@@ -63,13 +84,13 @@ class Note extends React.Component {
 
             const deleteButton = 
             <div className="dropdown note-dropdown">
-                <button className="btn btn-secondary btn-sm note-button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button className="btn btn-secondary btn-sm note-button" id="deleteButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span>
                         <img className="note-icon" src={del} alt="Delete icon"></img>
                     </span>
                     <b>Delete</b>
                 </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div className="dropdown-menu" aria-labelledby="deleteButton">
                 <a className="dropdown-item" href="#">Close</a>
                 <a className="dropdown-item" onClick={this.deleteNote} href="#">Delete</a>
                 </div>
