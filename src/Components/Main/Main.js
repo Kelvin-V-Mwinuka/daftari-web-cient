@@ -189,7 +189,7 @@ class Main extends React.Component{
                 </div>
 
                 {/* Logout Modal */}
-                <div className="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div className="modal fade" id="logoutModal" tabIndex="-1" role="dialog" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                     <div className="modal-body">

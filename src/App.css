@@ -55,7 +55,8 @@ body {
 }
 
 .note-button:hover{
-    color: #2E4053;
+    color: #f8f8f8 !important;
+    background-color: #2E4053 !important;
 }
 
 .note-icon {

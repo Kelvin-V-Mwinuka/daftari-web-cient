@@ -5,6 +5,7 @@ import './css/Note.css'
 import unliked from '../../img/unliked.svg'
 import liked from '../../img/liked.svg'
 import edit from '../../img/edit.svg'
+import del from '../../img/delete.svg'
 
 class Note extends React.Component {
 
@@ -41,6 +42,30 @@ class Note extends React.Component {
                 </span>
                 <b>Unlike</b>
                 </button>
+        }
+    }
+
+    getEditButton = () => {
+        // Return edit button if the user owns the note
+        if(this.props.user._id === this.props.note.user_id){
+            return <button className="btn btn-secondary btn-sm note-button" >
+                        <span>
+                            <img className="note-icon" src={edit} alt="Edit icon"></img>
+                        </span>
+                        <b>Edit</b>
+                    </button>
+        }
+    }
+
+    getDeleteButton = () => {
+        // Return the delete button if the user owns the note
+        if(this.props.user._id === this.props.note.user_id){
+            return <button className="btn btn-secondary btn-sm note-button" >
+                        <span>
+                            <img className="note-icon" src={del} alt="Delete icon"></img>
+                        </span>
+                        <b>Delete</b>
+                    </button>
         }
     }
 
@@ -81,12 +106,9 @@ class Note extends React.Component {
                     <p>
                         { this.getLikeButton() }
 
-                        <button className="btn btn-secondary btn-sm note-button" >
-                            <span>
-                                <img className="note-icon" src={edit} alt="Liked icon"></img>
-                            </span>
-                            <b>Edit</b>
-                        </button>
+                        { this.getEditButton() }
+
+                        { this.getDeleteButton() }
                     </p>
                 </div>
             </div>
