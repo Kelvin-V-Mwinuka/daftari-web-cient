@@ -17,8 +17,8 @@ class Home extends React.Component {
         }
 
         this.breakpointColumnsObj = {
-            default: 4,
-            1100: 3,
+            default: 3,
+            1100: 2,
             700: 1,
             500: 1
           };

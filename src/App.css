@@ -67,7 +67,9 @@ body {
 }
 
 .note-dropdown {
-    margin-left: 0px;
+    margin: 0px;
+    padding: 0px;
+    float: right;
 }
 
 .dropdown-item {
@@ -104,13 +106,13 @@ body {
 }
 
 @media (max-width : 600px){
-    * {
-        float: left;
-    }
     .custom-select{
         width: 18rem;
     }
     .modal-content {
         width: 20rem;
+    }
+    .note-dropdown{
+        float: initial;
     }
 }
