@@ -12,6 +12,14 @@ class Journal extends React.Component {
         return "Public"
     }
 
+    getEditButton = () => {
+        // Return the edit button if the journal belongs to the user 
+    }
+
+    getDeleteButton = () => {
+        // Return the delete button if the journal belongs to the user
+    }
+
     render(){
         return(
                     this.props.journal === null ?
@@ -22,6 +30,8 @@ class Journal extends React.Component {
                             <h5 className="card-title journal-title">No Journal</h5>
                             <h6 className="card-text journal-text">
                                 Displaying notes that don't belong to any journal
+                                { this.getEditButton() }
+                                { this.getDeleteButton() }
                             </h6>
                         </div>
                     </div> 

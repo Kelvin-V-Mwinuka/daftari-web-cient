@@ -24,9 +24,9 @@ class Note extends React.Component {
 
     getPrivateStatus = () => {
         if(this.props.note.private === "true"){
-            return "Private"
+            return <span className="badge badge-danger">Private</span>
         }
-        return "Public"
+        return <span className="badge badge-info">Public</span>
     }
 
     getLikeButton = () => {
@@ -68,13 +68,6 @@ class Note extends React.Component {
                 </div>
             </div>
             return editButton
-            {/** 
-            <button className="btn btn-secondary btn-sm note-button" >
-                        <span>
-                            <img className="note-icon" src={edit} alt="Edit icon"></img>
-                        </span>
-                        <b>Edit</b>
-                    </button> */}
         }
     }
 
@@ -149,6 +142,9 @@ class Note extends React.Component {
                                 return <span key={index} className="badge badge-success">{tag.trim()}</span>
                             })
                         }
+                    </p>
+                    <p>
+                        { this.getPrivateStatus() }
                     </p>
                     <div>
                         { this.getLikeButton() }
