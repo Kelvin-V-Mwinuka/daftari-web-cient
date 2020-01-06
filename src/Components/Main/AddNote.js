@@ -19,6 +19,8 @@ class AddNote extends React.Component{
 
         this.privateCheckRef = React.createRef()
         this.journalRef = React.createRef()
+        this.titleRef = React.createRef()
+        this.textRef = React.createRef()
     }
 
     componentDidMount(){
@@ -41,10 +43,14 @@ class AddNote extends React.Component{
         // If a note is passed, set its values on the form
         if(this.props.note){
 
-            // Set private checkbox to checked
-            this.privateCheckRef.current.checked = (this.props.note.private === "true")
             // Make journal selection element invisible
             this.journalRef.current.classList.add('d-none')
+            // Set title
+            this.titleRef.current.value = this.props.note.title
+            // Set private checkbox to checked
+            this.privateCheckRef.current.checked = (this.props.note.private === "true")
+            // Set the text of the note
+            this.textRef.current.value = this.props.note.text
 
             this.setState({
                 title : this.props.note.title,
@@ -175,8 +181,8 @@ class AddNote extends React.Component{
                 </div>
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <input type="text" onChange={this.onTitleChange} className="form-control" 
-                    id="title" name="title" placeholder="Note Title" value={this.state.title}></input>
+                    <input ref={this.titleRef} type="text" onChange={this.onTitleChange} className="form-control" 
+                    id="title" name="title" placeholder="Note Title"></input>
                 </div>
                 <div className="form-check">
                     <input ref={this.privateCheckRef} onClick={this.onPrivacyChange} type="checkbox" 
@@ -203,9 +209,8 @@ class AddNote extends React.Component{
                 </div>
                 <div className="form-group">
                     <label htmlFor="text-input">Text</label>
-                    <textarea onChange={this.onTextChange} className="form-control" 
-                    id="text-input" name="text-input" placeholder="Text" aria-describedby="textHelp"
-                    value={this.state.text}></textarea>
+                    <textarea ref={this.textRef} onChange={this.onTextChange} className="form-control" 
+                    id="text-input" name="text-input" placeholder="Text" aria-describedby="textHelp"></textarea>
                 </div>
 
                 <button type="submit" className="btn btn-primary">
