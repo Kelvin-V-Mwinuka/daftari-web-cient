@@ -201,8 +201,8 @@ class AddNote extends React.Component{
                         Add semi-colon(;) at the end of text to add it to list of tags
                     </small>
                     <div>
-                        { this.state.tags.map( tag => (
-                                <span class="badge badge-success">{tag}</span>
+                        { this.state.tags.map( (tag, index) => (
+                                <span key={index} className="badge badge-success">{tag}</span>
                             )
                         )}
                     </div>

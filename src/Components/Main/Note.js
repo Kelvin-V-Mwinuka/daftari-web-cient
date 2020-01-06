@@ -145,8 +145,8 @@ class Note extends React.Component {
                     </p>
                     <p>
                         {
-                            this.props.note.tags.split(",").map( tag => {
-                                return <span key={tag.trim()} className="badge badge-success">{tag.trim()}</span>
+                            this.props.note.tags.split(",").map( (tag, index) => {
+                                return <span key={index} className="badge badge-success">{tag.trim()}</span>
                             })
                         }
                     </p>
