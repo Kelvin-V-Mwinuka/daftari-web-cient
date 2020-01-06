@@ -60,13 +60,39 @@ class Note extends React.Component {
     getDeleteButton = () => {
         // Return the delete button if the user owns the note
         if(this.props.user._id === this.props.note.user_id){
-            return <button className="btn btn-secondary btn-sm note-button" >
-                        <span>
-                            <img className="note-icon" src={del} alt="Delete icon"></img>
-                        </span>
-                        <b>Delete</b>
-                    </button>
+
+            const deleteButton = 
+            <div className="dropdown note-dropdown">
+                <button className="btn btn-secondary btn-sm note-button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span>
+                        <img className="note-icon" src={del} alt="Delete icon"></img>
+                    </span>
+                    <b>Delete</b>
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a className="dropdown-item" href="#">Close</a>
+                <a className="dropdown-item" onClick={this.deleteNote} href="#">Delete</a>
+                </div>
+            </div>
+
+            return deleteButton
         }
+    }
+
+    deleteNote = (event) => {
+        var data = new FormData()
+        data.append('note_id', this.props.note._id)
+        data.append('user_id', this.props.user._id)
+
+        fetch(this.props.base_url + "/api/notes/delete", {
+            method : 'POST',
+            headers : { 'Accept' : 'application/json' },
+            body : new URLSearchParams(data)
+        })
+        .then( res => res.json() )
+        .then( data => {
+            console.log(data)
+        } )
     }
 
     likeNote = (event) => {
@@ -103,13 +129,13 @@ class Note extends React.Component {
                             })
                         }
                     </p>
-                    <p>
+                    <div>
                         { this.getLikeButton() }
 
                         { this.getEditButton() }
 
                         { this.getDeleteButton() }
-                    </p>
+                    </div>
                 </div>
             </div>
         )

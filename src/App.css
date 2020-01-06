@@ -66,6 +66,14 @@ body {
     margin-right: 0px;
 }
 
+.note-dropdown {
+    margin-left: 0px;
+}
+
+.dropdown-item {
+    width : auto;
+}
+
 .input-group-text{
     margin: 0px;
 }
@@ -101,5 +109,8 @@ body {
     }
     .custom-select{
         width: 18rem;
+    }
+    .modal-content {
+        width: 20rem;
     }
 }
