@@ -136,6 +136,7 @@ class AddNote extends React.Component{
 
     handleSubmit = (event) => {
         event.preventDefault()
+        const form = event.target
 
         // Check if either the title or text are provided
         if( this.state.title === "" && this.state.text === ""){
@@ -170,6 +171,8 @@ class AddNote extends React.Component{
                     this.props.getNotes()
                     // Display success toast
                     ToastsStore.success("Note created")
+                    // Cleat form after note creation
+                    form.reset()
                 } else {
                     // Display failed toast
                     ToastsStore.error("Failed to create note. Try again later")
