@@ -88,6 +88,7 @@ class AddJournal extends React.Component{
                     ToastsStore.success("Journal created")
                     // Clear form
                     form.reset()
+                    this.resetState()
                 } else {
                     // Display failed toast
                     ToastsStore.error("Journal creation failed. Try again later")
