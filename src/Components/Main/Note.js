@@ -64,7 +64,8 @@ class Note extends React.Component {
                     <AddNote 
                     base_url={this.props.base_url}
                     user={this.props.user}
-                    note={this.props.note} />
+                    note={this.props.note}
+                    getNotes={this.props.getNotes} />
                 </div>
             </div>
             return editButton
@@ -105,7 +106,9 @@ class Note extends React.Component {
         })
         .then( res => res.json() )
         .then( data => {
-            console.log(data)
+            if('status' in data && data.status === "Success"){
+                this.props.getNotes()
+            }
         } )
     }
 
@@ -148,9 +151,7 @@ class Note extends React.Component {
                     </p>
                     <div>
                         { this.getLikeButton() }
-
                         { this.getEditButton() }
-
                         { this.getDeleteButton() }
                     </div>
                 </div>

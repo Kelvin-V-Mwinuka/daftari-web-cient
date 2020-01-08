@@ -1,6 +1,7 @@
 import React from 'react'
 import buildUrl from 'build-url'
 import autosize from 'autosize'
+import {ToastsContainer, ToastsStore} from 'react-toasts'
 
 class AddNote extends React.Component{
     
@@ -61,6 +62,7 @@ class AddNote extends React.Component{
                 } )
             })
         }
+
     }
 
     onJournalChange = (event) => {
@@ -121,7 +123,14 @@ class AddNote extends React.Component{
         })
         .then( res => res.json() )
         .then( data => {
-            console.log(data)
+            if( 'status' in data && data.status === "Success" ){
+                this.props.getNotes()
+                // Display success toast
+                ToastsStore.success("Note updated")
+            } else {
+                // Display failed toast
+                ToastsStore.error("Failed to update note. Try again later")
+            }
         } )
     }
 
@@ -157,7 +166,14 @@ class AddNote extends React.Component{
             })
             .then( res => res.json() )
             .then( data => {
-                console.log(data)
+                if( 'status' in data && data.status === "Success" ){
+                    this.props.getNotes()
+                    // Display success toast
+                    ToastsStore.success("Note created")
+                } else {
+                    // Display failed toast
+                    ToastsStore.error("Failed to create note. Try again later")
+                }
             })
         }
     }
@@ -216,6 +232,8 @@ class AddNote extends React.Component{
                 <button type="submit" className="btn btn-primary">
                     { this.props.note ? "Update Note" : "Create Note" }
                 </button>
+
+                <ToastsContainer store={ToastsStore} />
             </form>
         )
     }

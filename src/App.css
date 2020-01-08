@@ -94,15 +94,8 @@ body {
 }
 
 .notes-grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -5px; /* gutter size offset */
-    width: max-content;
-}
-
-.notes-column {
-    padding-left: 0px; /* gutter size */
-    background-clip: padding-box;
+    margin: 0px;
+    width: 100%;
 }
 
 @media (max-width : 600px){

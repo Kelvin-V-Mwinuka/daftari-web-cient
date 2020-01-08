@@ -1,5 +1,6 @@
 import React from 'react'
 import autosize from 'autosize'
+import { ToastsContainer, ToastsStore } from 'react-toasts'
 import './css/Journal.css'
 
 class AddJournal extends React.Component{
@@ -71,7 +72,11 @@ class AddJournal extends React.Component{
             })
             .then( res => res.json() )
             .then( data => {
-                console.log(data)
+                if( 'status' in data && data.status == "Success"){
+                    ToastsStore.success("Journal created")
+                } else {
+                    ToastsStore.error("Journal creation failed. Try again later")
+                }
             })
         } else {
             // Display error to user
@@ -115,7 +120,10 @@ class AddJournal extends React.Component{
                 </div>
 
                 <button ref={this.submitButton} type="submit" className="btn btn-primary">
-                    Create Journal</button>
+                    Create Journal
+                </button>
+
+                <ToastsContainer store={ToastsStore} />
             </form>
         )   
     }

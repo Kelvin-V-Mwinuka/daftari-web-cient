@@ -1,5 +1,6 @@
 import React from 'react'
-import Masonry from 'react-masonry-css'
+import Masonry from 'react-masonry-component'
+import MasonryLayout from 'react-masonry-layout'
 
 // Import components
 import Journal from './Journal'
@@ -15,13 +16,6 @@ class Home extends React.Component {
             notes : [],
             selected_journal : null
         }
-
-        this.breakpointColumnsObj = {
-            default: 3,
-            1100: 2,
-            700: 1,
-            500: 1
-          };
     }
 
     onJournalChange = (event) => {
@@ -29,6 +23,7 @@ class Home extends React.Component {
     }
 
     render(){
+
         return(
             <div>
                 <div className="d-flex flex-row">
@@ -50,17 +45,17 @@ class Home extends React.Component {
                 journal={this.props.selected_journal} />
                 
                 <Masonry
-                breakpointCols={this.breakpointColumnsObj}
-                className="notes-grid"
-                columnClassName="notes-column" >
+                options={this.masonryOptions}
+                className="notes-grid d-flex flex-wrap">
                     {
                         this.props.notes.map( note => {
-                            return <Note key={note._id}
-                                         base_url={this.props.base_url}
-                                         user={this.props.user}
-                                         note={note}
-                                         liked_notes={this.props.liked_notes}
-                                         getLikedNotes={this.props.getLikedNotes} />
+                        return    <Note key={note._id}
+                                        base_url={this.props.base_url}
+                                        user={this.props.user}
+                                        note={note}
+                                        liked_notes={this.props.liked_notes}
+                                        getLikedNotes={this.props.getLikedNotes}
+                                        getNotes={this.props.getNotes} />
                         })
                     }
                 </Masonry>

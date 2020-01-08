@@ -29,7 +29,7 @@ class Journal extends React.Component {
                         <div className="card-body">
                             <h5 className="card-title journal-title">No Journal</h5>
                             <h6 className="card-text journal-text">
-                                Displaying notes that don't belong to any journal
+                                Notes that don't belong to any journal
                                 { this.getEditButton() }
                                 { this.getDeleteButton() }
                             </h6>

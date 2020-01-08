@@ -160,7 +160,8 @@ class Main extends React.Component{
                         liked_notes={this.state.liked_notes}
                         selected_journal={this.state.selected_journal}
                         setSelectedJournal={this.setSelectedJournal}
-                        getLikedNotes={this.getLikedNotes} />
+                        getLikedNotes={this.getLikedNotes}
+                        getNotes={this.getNotes} />
                     </div>
                     <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
                         <Profile
@@ -183,7 +184,8 @@ class Main extends React.Component{
                     <div className="tab-pane fade" id="pills-add-note" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <AddNote 
                         base_url={this.props.base_url} 
-                        user={this.props.user} />
+                        user={this.props.user}
+                        getNotes={this.getNotes} />
                     </div>
                     {/*
                     <div className="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-contact-tab">
