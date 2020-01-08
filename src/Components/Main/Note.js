@@ -85,8 +85,8 @@ class Note extends React.Component {
                     <b>Delete</b>
                 </button>
                 <div className="dropdown-menu" aria-labelledby="deleteButton">
-                <a className="dropdown-item" href="#">Close</a>
-                <a className="dropdown-item" onClick={this.deleteNote} href="#">Delete</a>
+                <a className="dropdown-item" href={this.props.base_url}>Close</a>
+                <a className="dropdown-item" onClick={this.deleteNote} href={this.props.base_url}>Delete</a>
                 </div>
             </div>
 

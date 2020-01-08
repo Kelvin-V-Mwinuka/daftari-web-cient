@@ -145,7 +145,7 @@ class Main extends React.Component{
                         </a>
                     </li>*/}
                     <li className="nav-item">
-                        <a className="nav-link" id="pills-logout-tab" data-toggle="modal" data-target="#logoutModal" aria-selected="false">
+                        <a className="nav-link" id="pills-logout-tab" data-toggle="modal" data-target="#logoutModal" aria-selected="false" href={this.props.base_url}>
                             Logout
                         </a>
                     </li>
