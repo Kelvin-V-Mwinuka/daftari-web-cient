@@ -73,8 +73,11 @@ class AddJournal extends React.Component{
             .then( res => res.json() )
             .then( data => {
                 if( 'status' in data && data.status == "Success"){
+                    this.props.getJournals()
+                    // Display succes toast
                     ToastsStore.success("Journal created")
                 } else {
+                    // Display failed toast
                     ToastsStore.error("Journal creation failed. Try again later")
                 }
             })

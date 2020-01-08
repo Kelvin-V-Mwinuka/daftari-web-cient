@@ -38,9 +38,11 @@ class UserInfo extends React.Component {
                                 <span className="badge badge-primary">Public</span>
                             }
                         </p>
+                        {/** 
                         <p>
                             <button className="btn btn-primary btn-sm">Edit</button>
                         </p>
+                        */}
                     </div>
                 </div>
             </div>
