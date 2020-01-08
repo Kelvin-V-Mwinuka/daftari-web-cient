@@ -65,6 +65,16 @@ class AddNote extends React.Component{
 
     }
 
+    resetState = () => {
+        this.setState({
+            journal_id : "",
+            title : "",
+            private : false,
+            text : "",
+            tags : [],
+        })
+    }
+
     onJournalChange = (event) => {
         const id = event.target.value
         this.setState({ journal_id : id})
@@ -141,8 +151,8 @@ class AddNote extends React.Component{
         // Check if either the title or text are provided
         if( this.state.title === "" && this.state.text === ""){
             // Set error
+            ToastsStore.error("You must provide either a title or text")
         } else {
-
             // If a note has been passed in props, call the update method instead
             if(this.props.note){
                 this.updateNote()
@@ -171,8 +181,9 @@ class AddNote extends React.Component{
                     this.props.getNotes()
                     // Display success toast
                     ToastsStore.success("Note created")
-                    // Cleat form after note creation
+                    // Clear form after note creation
                     form.reset()
+                    this.resetState()
                 } else {
                     // Display failed toast
                     ToastsStore.error("Failed to create note. Try again later")
