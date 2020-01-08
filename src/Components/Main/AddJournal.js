@@ -53,6 +53,7 @@ class AddJournal extends React.Component{
 
     handleSubmit = (event) => {
         event.preventDefault()
+        const form = event.target
         // Check if title is provided
         if(!(this.state.title === "")){
             const data = new FormData()
@@ -76,6 +77,8 @@ class AddJournal extends React.Component{
                     this.props.getJournals()
                     // Display succes toast
                     ToastsStore.success("Journal created")
+                    // Clear form
+                    form.reset()
                 } else {
                     // Display failed toast
                     ToastsStore.error("Journal creation failed. Try again later")
