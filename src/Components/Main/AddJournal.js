@@ -20,6 +20,15 @@ class AddJournal extends React.Component{
         this.tagsContainer = React.createRef();
     }
     
+    resetState = () => {
+        this.setState({
+            title : "",
+            description : "",
+            private : false,
+            tags : [],
+        })
+    }
+
     onTitleChange = (event) => {
         var newTitle = event.target.value.trim()
         this.setState({ title : newTitle })
@@ -86,6 +95,7 @@ class AddJournal extends React.Component{
             })
         } else {
             // Display error to user
+            ToastsStore.error("You must provide a title")
         }
     }
 
