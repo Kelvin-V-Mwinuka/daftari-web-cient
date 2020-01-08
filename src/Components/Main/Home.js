@@ -1,6 +1,5 @@
 import React from 'react'
 import Masonry from 'react-masonry-component'
-import MasonryLayout from 'react-masonry-layout'
 
 // Import components
 import Journal from './Journal'
