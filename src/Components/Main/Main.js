@@ -92,12 +92,8 @@ class Main extends React.Component{
     }
 
     getLikedNotes = () => {
-        const url = buildUrl(this.props.base_url, {
-            path : "/api/notes/liked",
-            queryParams : {
-                user_id : this.props.user._id
-            }
-        })
+        const url = this.props.base_url + "/api/notes/liked?user_id=" + this.props.user._id
+
         fetch(url, { method : 'GET', headers : { 'Accept' : 'application/json' } })
         .then( res => res.json() )
         .then( data => {

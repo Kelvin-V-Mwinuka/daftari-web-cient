@@ -252,10 +252,12 @@ class Register extends React.Component{
             body : new URLSearchParams(new FormData(event.target))
         })
         .then( res => res.json() )
-        .then( user => {
-            // Save data in localStorage
-            localStorage.setItem('user', JSON.stringify(user))
-            this.props.getUser()
+        .then( data => {
+            if( 'status' in data && data.status === "Success" ){
+                // Save data in localStorage
+                localStorage.setItem('user', JSON.stringify(data.user))
+                this.props.getUser()
+            }
         } )
     }
 

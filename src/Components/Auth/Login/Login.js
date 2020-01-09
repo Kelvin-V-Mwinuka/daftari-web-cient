@@ -25,12 +25,12 @@ class Login extends React.Component{
         fetch(url, { method : 'POST' })
         .then( res => res.json() )
         .then( data => {
-            if( ('statusCode' in data) || ('message' in data)){
-                console.log(data)
-            } else {
+            if( 'status' in data && data.status === 'Success' ){
                 // Save the user to local storage if they are successfully retrieved
-                localStorage.setItem('user', JSON.stringify(data))
+                localStorage.setItem('user', JSON.stringify(data.user))
                 this.props.getUser()
+            } else {
+                this.alert.current.classList.remove('d-md-none')
             }
         } )
     }
