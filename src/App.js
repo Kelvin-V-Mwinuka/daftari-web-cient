@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       user : null,
       //base_url : 'http://localhost:8000',
-      base_url : 'https://daftari-api.herokuapp.com/'
+      base_url : 'https://daftari-api.herokuapp.com'
     }
   }
 
