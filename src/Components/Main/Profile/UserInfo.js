@@ -29,7 +29,7 @@ class UserInfo extends React.Component {
                     <div className="media-body">
                         <h5>{this.props.user.name}</h5>
                         <h6 className="text-muted">
-                            {this.props.user.email} - {this.props.user.username}
+                            {this.props.user.username}
                         </h6>
                         <p>
                             {
@@ -46,7 +46,7 @@ class UserInfo extends React.Component {
                     </div>
                 </div>
             </div>
-</div>
+            </div>
         )
     }
 }

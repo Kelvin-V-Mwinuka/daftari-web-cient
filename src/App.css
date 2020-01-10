@@ -114,4 +114,7 @@ body {
     .data-form {
         width: 100%;
     }
+    .profile-card {
+        width: 18rem !important;
+    }
 }
