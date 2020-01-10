@@ -111,4 +111,7 @@ body {
     .auth-form {
         width : 100%
     }
+    .data-form {
+        width: 100%;
+    }
 }
