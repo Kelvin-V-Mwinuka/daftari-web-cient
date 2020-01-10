@@ -256,7 +256,7 @@ class Register extends React.Component{
                 localStorage.setItem('user', JSON.stringify(data.user))
                 this.props.getUser()
             } else {
-                console.log(data)
+                // Display signup error
             }
         } )
     }
