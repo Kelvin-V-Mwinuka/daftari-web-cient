@@ -99,13 +99,16 @@ body {
 }
 
 @media (max-width : 600px){
-    .custom-select{
+    .custom-select {
         width: 18rem;
     }
     .modal-content {
         width: 20rem;
     }
-    .note-dropdown{
+    .note-dropdown {
         float: initial;
+    }
+    .auth-form {
+        width : 100%
     }
 }
