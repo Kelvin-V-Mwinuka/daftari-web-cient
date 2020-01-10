@@ -66,14 +66,13 @@ class Register extends React.Component{
             // Check email format validity
             if(EmailValidator.validate(emailText.value)){
                 // Validate email availability on ther server if email format is valid
-                const url = buildUrl(this.props.base_url, {
-                    path : 'api/validate/email',
-                    queryParams : {
-                        email : emailText.value
-                    }
-                });
+                var data = new FormData()
+                data.append('email', emailText.value)
 
-                fetch(url)
+                fetch(this.props.base_url + "/api/validate/email", { 
+                    method : 'POST', 
+                    body : new URLSearchParams(data)
+                })
                 .then( res => res.json() )
                 .then( data => {
                     if(data.available === true){
@@ -118,14 +117,13 @@ class Register extends React.Component{
             })
         } else {
             // Check username availability on the server
-            const url = buildUrl(this.props.base_url, {
-                path : 'api/validate/username',
-                queryParams : {
-                    username : usernameText.value
-                }
-            });
-            
-            fetch(url)
+            var data = new FormData()
+            data.append('username', usernameText.value)
+
+            fetch(this.props.base_url + "/api/validate/username", { 
+                method : 'POST',
+                body : new URLSearchParams(data)
+            })
             .then( res => res.json() )
             .then( data => {
                 if(data.available === true){
@@ -257,6 +255,8 @@ class Register extends React.Component{
                 // Save data in localStorage
                 localStorage.setItem('user', JSON.stringify(data.user))
                 this.props.getUser()
+            } else {
+                alert(data)
             }
         } )
     }
