@@ -141,10 +141,10 @@ class AddJournal extends React.Component{
                     <Form.Control as="textarea" onChange={this.onDescriptionChange} name="description-input" placeholder="Description"></Form.Control>
                 </Form.Group>
 
-                <Button ref={this.submitButton} type="submit" className="btn btn-primary">
+                <Button ref={this.submitButton} type="submit" className="btn-primary">
                     Create Journal
                 </Button>
-                
+
                 <ToastsContainer store={ToastsStore} />
             </Form>
         )   

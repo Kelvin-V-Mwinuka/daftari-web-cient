@@ -1,6 +1,7 @@
 import React from 'react'
 import buildUrl from 'build-url'
 import autosize from 'autosize'
+import { Button, Form, Badge } from 'react-bootstrap'
 import {ToastsContainer, ToastsStore} from 'react-toasts'
 
 class AddNote extends React.Component{
@@ -194,11 +195,10 @@ class AddNote extends React.Component{
 
     render(){
         return (
-            <form className="data-form" onSubmit={this.handleSubmit} >
-                <div className="form-group" ref={this.journalRef}>
-                    <label htmlFor="journal-select">Journal</label>
-                    <select onChange={this.onJournalChange} className="form-control" 
-                    id="journal-select" name="journal-select">
+            <Form className="data-form" onSubmit={this.handleSubmit} >
+                <Form.Group ref={this.journalRef}>
+                    <Form.Label htmlFor="journal-select">Journal</Form.Label>
+                    <Form.Control as="select" onChange={this.onJournalChange} name="journal-select">
                         <option value="">No Journal</option>
                         {
                             this.state.journals.map( journal => {
@@ -207,48 +207,48 @@ class AddNote extends React.Component{
                                     </option>
                             })
                         }
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="title">Title</label>
-                    <input ref={this.titleRef} type="text" onChange={this.onTitleChange} className="form-control" 
-                    id="title" name="title" placeholder="Note Title"></input>
-                </div>
-                <div className="form-check">
-                    <input ref={this.privateCheckRef} onClick={this.onPrivacyChange} type="checkbox" 
-                    className="form-check-input" id="private" name="private" aria-describedby="privateHelp"></input>
-                    <label className="form-check-label" htmlFor="private">Private</label>
-                    <small id="privateHelp" className="form-text text-muted">
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label htmlFor="title">Title</Form.Label>
+                    <Form.Control ref={this.titleRef} type="text" onChange={this.onTitleChange} name="title" placeholder="Note Title"></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Check
+                        ref={this.privateCheckRef} 
+                        onClick={this.onPrivacyChange} 
+                        type="checkbox"
+                        label="Private"
+                        name="private">
+                    </Form.Check>
+                    <Form.Text className="text-muted">
                         All notes created in a private journal will automatically be private
-                    </small>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="tags-input">Tags</label>
-                    <textarea onChange={this.onTagsChange} type="text" className="form-control" 
-                    id="tags-input" name="tags-input" placeholder="Tags" aria-describedby="tagsHelp"
-                    value={this.state.tags.join(";")}></textarea>
-                    <small id="tagsHelp" className="form-text text-muted">
+                    </Form.Text>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label htmlFor="tags-input">Tags</Form.Label>
+                    <Form.Control as="textarea" onChange={this.onTagsChange} type="text" className="form-control" name="tags-input" placeholder="Tags" value={this.state.tags.join(";")}></Form.Control>
+                    <Form.Text className="text-muted">
                         Add semi-colon(;) at the end of text to add it to list of tags
-                    </small>
+                    </Form.Text>
                     <div>
                         { this.state.tags.map( (tag, index) => (
-                                <span key={index} className="badge badge-success">{tag}</span>
+                                <Badge key={index} variant="success">{tag}</Badge>
                             )
                         )}
                     </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="text-input">Text</label>
-                    <textarea ref={this.textRef} onChange={this.onTextChange} className="form-control" 
-                    id="text-input" name="text-input" placeholder="Text" aria-describedby="textHelp"></textarea>
-                </div>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label htmlFor="text-input">Text</Form.Label>
+                    <Form.Control as="textarea" ref={this.textRef} onChange={this.onTextChange} name="text-input" placeholder="Text"></Form.Control>
+                </Form.Group>
 
-                <button type="submit" className="btn btn-primary">
+                <Button type="submit" className="btn-primary">
                     { this.props.note ? "Update Note" : "Create Note" }
-                </button>
+                </Button>
 
                 <ToastsContainer store={ToastsStore} />
-            </form>
+            </Form>
         )
     }
 }
