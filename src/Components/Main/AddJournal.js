@@ -1,7 +1,7 @@
 import React from 'react'
 import autosize from 'autosize'
 import { ToastsContainer, ToastsStore } from 'react-toasts'
-import { Button, Form, FormControl } from 'react-bootstrap'
+import { Button, Form, Badge } from 'react-bootstrap'
 import './css/Journal.css'
 
 class AddJournal extends React.Component{
@@ -105,42 +105,46 @@ class AddJournal extends React.Component{
         return (
             <Form className="data-form" onSubmit={this.handleSubmit} >
                 <Form.Group>
-                    <label htmlFor="title">Title</label>
-                    <input onChange={this.onTitleChange} type="text" className="form-control" id="title" name="title" placeholder="Note Title"></input>
+                    <Form.Label htmlFor="title">Title</Form.Label>
+                    <Form.Control onChange={this.onTitleChange} type="text" name="title" placeholder="Note Title"></Form.Control>
                 </Form.Group>
-                <div className="form-check">
-                    <input onClick={this.onPrivacyChange} type="checkbox" className="form-check-input" id="private" name="private" aria-describedby="privateHelp"></input>
-                    <label className="form-check-label" htmlFor="private">Private</label>
-                    <small id="privateHelp" className="form-text text-muted">
+                <Form.Group>
+                    <Form.Check
+                        onClick={this.onPrivacyChange} 
+                        type="checkbox" 
+                        name="private"
+                        label="Private">
+                    </Form.Check>
+                    <Form.Text id="privateHelp" className="form-text text-muted">
                         All notes created in a private journal will automatically be private
-                    </small>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="tags-input">Tags</label>
-                    <textarea onChange={this.onTagsChange} type="text" className="form-control" id="tags-input" name="tags-input" placeholder="Tags" aria-describedby="tagsHelp"></textarea>
-                    <small id="tagsHelp" className="form-text text-muted">
+                    </Form.Text>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label htmlFor="tags-input">Tags</Form.Label>
+                    <Form.Control as="textarea" onChange={this.onTagsChange} type="text" className="form-control" name="tags-input" placeholder="Tags"></Form.Control>
+                    <Form.Text className="text-muted">
                         Add semi-colon(;) at the end of text to add it to list of tags
-                    </small>
+                    </Form.Text>
                     <div ref={this.tagsContainer}>
                         { this.state.tags.map( tag => (
-                                <span class="badge badge-warning">{tag}</span>
+                                <Badge variant="warning">{tag}</Badge>
                             )
                         )}
                     </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description-input">Description</label>
-                    <small ref={this.characterIndicator} id="descriptionHelp" className="form-text text-success">
+                </Form.Group>
+                <Form.Group className="form-group">
+                    <Form.Label htmlFor="description-input">Description</Form.Label>
+                    <Form.Text ref={this.characterIndicator} className="text-success">
                         { 140 - this.state.description.length } characters
                         { this.state.description.length > 140 ? ". Description will be trimmed to 140 characters" : "" }
-                    </small>
-                    <textarea className="form-control" onChange={this.onDescriptionChange} id="description-input" name="description-input" placeholder="Description" aria-describedby="descriptionHelp"></textarea>
-                </div>
+                    </Form.Text>
+                    <Form.Control as="textarea" onChange={this.onDescriptionChange} name="description-input" placeholder="Description"></Form.Control>
+                </Form.Group>
 
                 <Button ref={this.submitButton} type="submit" className="btn btn-primary">
                     Create Journal
                 </Button>
-
+                
                 <ToastsContainer store={ToastsStore} />
             </Form>
         )   
