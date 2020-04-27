@@ -198,7 +198,7 @@ class Main extends React.Component{
                     <div className="modal-body">
                         <p>Are you sure you want to log out?</p>
                         <button type="button" className="btn btn-secondary note-button" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.props.logout}>Logout</button>
+                        <button type="button" className="btn btn-primary note-button" data-dismiss="modal" onClick={this.props.logout}>Logout</button>
                     </div>
                     </div>
                 </div>
