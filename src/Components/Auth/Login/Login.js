@@ -46,11 +46,11 @@ class Login extends React.Component{
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Username or Email</Form.Label>
-                    <Form.Control type="text" className="form-control" id="username" name="username" placeholder="Enter username or email"></Form.Control>
+                    <Form.Control type="text" name="username" placeholder="Enter username or email"></Form.Control>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" className="form-control" id="password" name="password" placeholder="Password"></Form.Control>
+                    <Form.Control type="password" name="password" placeholder="Password"></Form.Control>
                 </Form.Group>
                 <Button type="submit" className="btn btn-primary">Submit</Button>
             </Form>
