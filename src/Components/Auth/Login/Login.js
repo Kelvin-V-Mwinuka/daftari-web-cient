@@ -1,5 +1,6 @@
 import React from 'react'
 import buildUrl from 'build-url'
+import { Button, Alert, Form } from 'react-bootstrap'
 
 class Login extends React.Component{
     
@@ -37,22 +38,22 @@ class Login extends React.Component{
 
     render(){
         return (
-            <form className="auth-form" onSubmit={this.handleLogin}>
-                <div className="form-group">
-                <div ref={this.alert} className="alert alert-danger d-md-none" role="alert">
+            <Form className="auth-form" onSubmit={this.handleLogin}>
+                <Form.Group>
+                <Alert variant="danger" ref={this.alert} className="d-md-none">
                     Wrong username/email or password
-                </div>
-                </div>
-                <div className="form-group">
-                    <label>Username or Email</label>
-                    <input type="text" className="form-control" id="username" name="username" placeholder="Enter username or email"></input>
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" id="password" name="password" placeholder="Password"></input>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+                </Alert>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Username or Email</Form.Label>
+                    <Form.Control type="text" className="form-control" id="username" name="username" placeholder="Enter username or email"></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" className="form-control" id="password" name="password" placeholder="Password"></Form.Control>
+                </Form.Group>
+                <Button type="submit" className="btn btn-primary">Submit</Button>
+            </Form>
         )
     }
 }
