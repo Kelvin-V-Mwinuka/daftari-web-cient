@@ -265,41 +265,40 @@ class Register extends React.Component{
     render(){
         return (
             <Form className="auth-form" onSubmit={this.handleFormSubmit}>
-                <Form.Group className="form-group">
+                <Form.Group>
                     <Form.Label forhtml="email">Name</Form.Label>
-                    <Form.Control onChange={this.handleNameChange} type="text" className="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder="Enter name"></Form.Control>
-                    <Form.Text id="nameHelp" className="form-text text-muted">You may choose wether to display this publicly to other Daftari users</Form.Text>
+                    <Form.Control onChange={this.handleNameChange} type="text" name="name" placeholder="Enter name"></Form.Control>
+                    <Form.Text className="text-muted">You may choose wether to display this publicly to other Daftari users</Form.Text>
                     <FormControl.Feedback type="valid">Awesome!</FormControl.Feedback>
                     <FormControl.Feedback type="invalid">{this.state.name.error}</FormControl.Feedback>
                 </Form.Group>
-                <Form.Group  className="form-group">
+                <Form.Group>
                     <Form.Label forhtml="email">Email</Form.Label>
-                    <Form.Control onChange={this.handleEmailChange} type="email" className="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email"></Form.Control>
-                    <Form.Text id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</Form.Text>
+                    <Form.Control onChange={this.handleEmailChange} type="email" name="email" placeholder="Enter email"></Form.Control>
+                    <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
                     <FormControl.Feedback type="valid">Awesome!</FormControl.Feedback>
                     <FormControl.Feedback type="invalid">{this.state.email.error}</FormControl.Feedback>
                 </Form.Group>
-                <Form.Group  className="form-group">
+                <Form.Group>
                     <Form.Label forhtml="email">Username</Form.Label>
-                    <Form.Control onChange={this.handleUsernameChange} type="text" className="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Enter username"></Form.Control>
-                    <Form.Text id="usernameHelp" className="form-text text-muted">This will be publicly visible to other Daftari users.</Form.Text>
+                    <Form.Control onChange={this.handleUsernameChange} type="text" name="username" placeholder="Enter username"></Form.Control>
+                    <Form.Text className="text-muted">This will be publicly visible to other Daftari users.</Form.Text>
                     <FormControl.Feedback type="valid">Awesome!</FormControl.Feedback>
                     <FormControl.Feedback type="invalid">{this.state.username.error}</FormControl.Feedback>
                 </Form.Group>
-                <Form.Group  className="form-group">
+                <Form.Group>
                     <Form.Label forhtml="password">Password</Form.Label>
-                    <Form.Control onChange={this.handlePasswordChange} type="password" className="form-control" id="password" name="password" placeholder="Password"></Form.Control>
+                    <Form.Control onChange={this.handlePasswordChange} type="password" name="password" placeholder="Password"></Form.Control>
                     <FormControl.Feedback type="valid">Awesome!</FormControl.Feedback>
                     <FormControl.Feedback type="invalid">{this.state.password.error}</FormControl.Feedback>
-                </Form.Group >
-                <Form.Group  className="form-group">
+                </Form.Group>
+                <Form.Group>
                     <Form.Label forhtml="confirmPassword">Confirm password</Form.Label>
-                    <Form.Control onChange={this.handleConfirmPasswordChange} ref={this.confirmPasswordRef} type="password" className="form-control" id="confirmPassword" name="confirmPassword" placeholder="Password"></Form.Control>
+                    <Form.Control onChange={this.handleConfirmPasswordChange} ref={this.confirmPasswordRef} type="password" name="confirmPassword" placeholder="Password"></Form.Control>
                     <FormControl.Feedback type="valid">Passwords match!</FormControl.Feedback>
                     <FormControl.Feedback type="invalid">Passwords don't match</FormControl.Feedback>
                 </Form.Group>
-                
-                <Form.Group  className="form-group">
+                <Form.Group>
                     <Form.Label>Gender: </Form.Label>
                         <Form.Check 
                             inline
@@ -326,7 +325,7 @@ class Register extends React.Component{
                             label="Other">
                         </Form.Check>
                 </Form.Group>
-                <Button type="submit" className="btn btn-primary">Submit</Button>
+                <Button type="submit" className="btn-primary">Submit</Button>
             </Form>
         )
     }

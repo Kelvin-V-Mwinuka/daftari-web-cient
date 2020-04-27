@@ -1,6 +1,7 @@
 import React from 'react'
 import autosize from 'autosize'
 import { ToastsContainer, ToastsStore } from 'react-toasts'
+import { Button, Form, FormControl } from 'react-bootstrap'
 import './css/Journal.css'
 
 class AddJournal extends React.Component{
@@ -102,11 +103,11 @@ class AddJournal extends React.Component{
 
     render(){
         return (
-            <form className="data-form" onSubmit={this.handleSubmit} >
-                <div className="form-group">
+            <Form className="data-form" onSubmit={this.handleSubmit} >
+                <Form.Group>
                     <label htmlFor="title">Title</label>
                     <input onChange={this.onTitleChange} type="text" className="form-control" id="title" name="title" placeholder="Note Title"></input>
-                </div>
+                </Form.Group>
                 <div className="form-check">
                     <input onClick={this.onPrivacyChange} type="checkbox" className="form-check-input" id="private" name="private" aria-describedby="privateHelp"></input>
                     <label className="form-check-label" htmlFor="private">Private</label>
@@ -136,12 +137,12 @@ class AddJournal extends React.Component{
                     <textarea className="form-control" onChange={this.onDescriptionChange} id="description-input" name="description-input" placeholder="Description" aria-describedby="descriptionHelp"></textarea>
                 </div>
 
-                <button ref={this.submitButton} type="submit" className="btn btn-primary">
+                <Button ref={this.submitButton} type="submit" className="btn btn-primary">
                     Create Journal
-                </button>
+                </Button>
 
                 <ToastsContainer store={ToastsStore} />
-            </form>
+            </Form>
         )   
     }
 }
