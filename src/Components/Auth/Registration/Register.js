@@ -1,7 +1,7 @@
 import React from 'react'
 import * as EmailValidator from 'email-validator'
 import buildUrl from 'build-url'
-import { Button, Alert, Form, FormControl } from 'react-bootstrap'
+import { Button, Form, FormControl } from 'react-bootstrap'
 
 class Register extends React.Component{
 
