@@ -2,7 +2,7 @@ import * as constants from './const'
 import { combineReducers } from 'redux'
 
 const initial_state = {
-    base_url: 'http://localhost:8000'
+    base_url: process.env.REACT_APP_BASE_URL
 }
 
 const generalReducer = (state=initial_state, action) => {
