@@ -35,7 +35,7 @@ class App extends React.Component {
 
   componentDidMount(){
     this.getUser()
-    console.log(process.env)
+    this.props.login()
   }
 
   render(){
@@ -51,9 +51,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    general: state.general
-  }
+  return state
 }
 
 const mapDispatchToProps = (dispatch) => {
