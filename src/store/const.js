@@ -1,0 +1,1 @@
+export const LOAD_HOME_PAGE = "LOAD_HOME_PAGE";

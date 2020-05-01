@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from './store/actions'
 import './App.css';
 
 // Import components
 import Auth from './Components/Auth/Auth'
 import Main from './Components/Main/Main'
+import { bindActionCreators } from 'redux';
 
 class App extends React.Component {
 
@@ -46,4 +49,14 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    general: state.general
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
